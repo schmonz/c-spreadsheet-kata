@@ -1,4 +1,6 @@
 SILENT		?= @
+DEBUG		?= 
+DEBUG_MALLOC	?= env DYLD_INSERT_LIBRARIES=/usr/lib/libgmalloc.dylib
 
 THE_TESTS	=  check_spreadsheet
 THE_LIBRARY	=  spreadsheet.a
@@ -10,7 +12,7 @@ CHECK_LIBS	:= $(shell pkg-config --libs check 2>/dev/null)
 all: check
 
 check: ${THE_TESTS}
-	${SILENT}./${THE_TESTS}
+	${SILENT}${DEBUG} ./${THE_TESTS}
 
 valgrind: ${THE_TESTS}
 	${SILENT}valgrind --leak-check=full --show-leak-kinds=all ./${THE_TESTS}

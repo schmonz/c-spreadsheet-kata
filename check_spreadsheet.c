@@ -1,26 +1,27 @@
 #include <check.h>
 
-#include <stdlib.h>
-
 #include "spreadsheet.h"
 
-START_TEST(spreadsheet_create_and_destroy)
+spreadsheet_t sheet;
+
+void setup(void)
 {
-    spreadsheet_t sheet = spreadsheet_create();
+    sheet = spreadsheet_create();
+}
 
-    ck_assert_ptr_ne(NULL, sheet);
-
+void teardown(void)
+{
     spreadsheet_destroy(sheet);
 }
-END_TEST
 
 START_TEST(index_0_to_column_A)
 {
-    spreadsheet_t sheet = spreadsheet_create();
-
     ck_assert_str_eq("A", sheet->index_to_column(0));
+} END_TEST
 
-    spreadsheet_destroy(sheet);
+START_TEST(index_1_to_column_B)
+{
+    ck_assert_str_eq("B", sheet->index_to_column(1));
 } END_TEST
 
 TCase
@@ -28,8 +29,9 @@ TCase
 {
     TCase *tc = tcase_create("Spreadsheet Math");
 
-    tcase_add_test(tc, spreadsheet_create_and_destroy);
+    tcase_add_checked_fixture(tc, setup, teardown);
     tcase_add_test(tc, index_0_to_column_A);
+    tcase_add_test(tc, index_1_to_column_B);
 
     return tc;
 }
@@ -50,6 +52,7 @@ main(void)
     int number_failed;
 
     SRunner *sr = srunner_create(spreadsheet_suite());
+    srunner_set_fork_status(sr, CK_NOFORK);
     srunner_run_all(sr, CK_NORMAL);
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);

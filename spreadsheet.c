@@ -4,8 +4,11 @@
 
 static char * index_to_column(size_t index)
 {
-    (void)index;
-    return "A";
+    char *result = malloc(2);
+    char this_char = (char)(index + 'A');
+    result[0] = this_char;
+    result[1] = '\0';
+    return result;
 }
 
 spreadsheet_t spreadsheet_create(void)
