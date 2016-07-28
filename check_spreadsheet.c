@@ -52,6 +52,10 @@ START_TEST(column_AAA_to_index_702) {
     check_column_becomes_index("AAA", 702);
 } END_TEST
 
+START_TEST(column_AAB_to_index_703) {
+    check_column_becomes_index("AAB", 703);
+} END_TEST
+
 START_TEST(index_0_to_column_A) {
     check_index_becomes_column(0, "A");
 } END_TEST
@@ -92,6 +96,7 @@ TCase
     tcase_add_test(tc, column_AA_to_index_26);
     tcase_add_test(tc, column_ZY_to_index_700);
     tcase_add_test(tc, column_AAA_to_index_702);
+    tcase_add_test(tc, column_AAB_to_index_703);
 
     return tc;
 }

@@ -27,7 +27,7 @@ static int column_to_index(const char *column)
 
     for (size_t i = 1; i < strlen(column); i++) {
         result = 26 * (result + 1);
-        result += char_to_int(column[1]);
+        result += char_to_int(column[i]);
     }
 
     return result;
