@@ -43,6 +43,10 @@ START_TEST(index_27_to_column_AB) {
     check_index_becomes_column(27, "AB");
 } END_TEST
 
+START_TEST(index_700_to_column_ZY) {
+    check_index_becomes_column(25 + 26*26 - 1, "ZY");
+} END_TEST
+
 TCase
 *spreadsheet_math(void)
 {
@@ -54,6 +58,7 @@ TCase
     tcase_add_test(tc, index_25_to_column_Z);
     tcase_add_test(tc, index_26_to_column_AA);
     tcase_add_test(tc, index_27_to_column_AB);
+    tcase_add_test(tc, index_700_to_column_ZY);
 
     return tc;
 }

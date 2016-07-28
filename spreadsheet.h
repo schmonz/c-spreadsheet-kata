@@ -1,5 +1,5 @@
 typedef struct spreadsheet {
-    char * (*index_to_column)(size_t);
+    char * (*index_to_column)(int);
 } *spreadsheet_t;
 
 spreadsheet_t spreadsheet_create(void);

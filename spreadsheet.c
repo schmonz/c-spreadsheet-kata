@@ -16,28 +16,23 @@ static void reverse(char *string)
     }
 }
 
-static char size_t_to_char(size_t n)
+static char int_to_char(size_t n)
 {
     return (char)(n % 26 + 'A');
 }
 
-static char * index_to_column(size_t index)
+static char * index_to_column(int index)
 {
     const size_t ARTIFICIALLY_LARGE_AMOUNT_OF_MEMORY = 777;
     char *result = malloc(ARTIFICIALLY_LARGE_AMOUNT_OF_MEMORY);
     size_t pos = 0;
-    char this_char;
 
     memset(result, '\0', ARTIFICIALLY_LARGE_AMOUNT_OF_MEMORY);
 
-    if (index > 25) {
-        this_char = size_t_to_char(index);
+    do {
+        result[pos++] = int_to_char(index);
         index = index / 26 - 1;
-        result[pos++] = this_char;
-    }
-
-    this_char = size_t_to_char(index);
-    result[pos++] = this_char;
+    } while (index >= 0);
 
     reverse(result);
     return result;
