@@ -16,6 +16,11 @@ void teardown(void)
     spreadsheet_destroy(sheet);
 }
 
+static void check_column_becomes_index(const char *column, size_t expected)
+{
+    ck_assert_int_eq(expected, sheet->column_to_index(column));
+}
+
 static void check_index_becomes_column(size_t index, const char *expected)
 {
     char *actual = sheet->index_to_column(index);
@@ -24,15 +29,19 @@ static void check_index_becomes_column(size_t index, const char *expected)
 }
 
 START_TEST(column_A_to_index_0) {
-    ck_assert_int_eq(0, sheet->column_to_index("A"));
+    check_column_becomes_index("A", 0);
 } END_TEST
 
 START_TEST(column_B_to_index_1) {
-    ck_assert_int_eq(1, sheet->column_to_index("B"));
+    check_column_becomes_index("B", 1);
 } END_TEST
 
 START_TEST(column_Z_to_index_25) {
-    ck_assert_int_eq(25, sheet->column_to_index("Z"));
+    check_column_becomes_index("Z", 25);
+} END_TEST
+
+START_TEST(column_AA_to_index_26) {
+    check_column_becomes_index("AA", 26);
 } END_TEST
 
 START_TEST(index_0_to_column_A) {
@@ -72,6 +81,7 @@ TCase
     tcase_add_test(tc, column_A_to_index_0);
     tcase_add_test(tc, column_B_to_index_1);
     tcase_add_test(tc, column_Z_to_index_25);
+    tcase_add_test(tc, column_AA_to_index_26);
 
     return tc;
 }
