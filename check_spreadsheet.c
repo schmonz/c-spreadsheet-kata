@@ -1,5 +1,7 @@
 #include <check.h>
 
+#include <stdlib.h>
+
 #include "spreadsheet.h"
 
 spreadsheet_t sheet;
@@ -14,14 +16,26 @@ void teardown(void)
     spreadsheet_destroy(sheet);
 }
 
+static void check_index_becomes_column(size_t index, const char *expected)
+{
+    char *actual = sheet->index_to_column(index);
+    ck_assert_str_eq(expected, actual);
+    free(actual);
+}
+
 START_TEST(index_0_to_column_A)
 {
-    ck_assert_str_eq("A", sheet->index_to_column(0));
+    check_index_becomes_column(0, "A");
 } END_TEST
 
 START_TEST(index_1_to_column_B)
 {
-    ck_assert_str_eq("B", sheet->index_to_column(1));
+    check_index_becomes_column(1, "B");
+} END_TEST
+
+START_TEST(index_25_to_column_Z)
+{
+    check_index_becomes_column(25, "Z");
 } END_TEST
 
 TCase
@@ -32,6 +46,7 @@ TCase
     tcase_add_checked_fixture(tc, setup, teardown);
     tcase_add_test(tc, index_0_to_column_A);
     tcase_add_test(tc, index_1_to_column_B);
+    tcase_add_test(tc, index_25_to_column_Z);
 
     return tc;
 }
