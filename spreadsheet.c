@@ -16,6 +16,12 @@ static void reverse(char *string)
     }
 }
 
+static int column_to_index(const char *column)
+{
+    (void)column;
+    return 0;
+}
+
 static char int_to_char(size_t n)
 {
     return (char)(n % 26 + 'A');
@@ -42,6 +48,7 @@ spreadsheet_t spreadsheet_create(void)
 {
     spreadsheet_t sheet = malloc(1);
     sheet->index_to_column = index_to_column;
+    sheet->column_to_index = column_to_index;
     return sheet;
 }
 

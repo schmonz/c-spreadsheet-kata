@@ -23,6 +23,10 @@ static void check_index_becomes_column(size_t index, const char *expected)
     free(actual);
 }
 
+START_TEST(column_A_to_index_0) {
+    ck_assert_int_eq(0, sheet->column_to_index("A"));
+} END_TEST
+
 START_TEST(index_0_to_column_A) {
     check_index_becomes_column(0, "A");
 } END_TEST
@@ -52,9 +56,20 @@ START_TEST(index_702_to_column_AAA) {
 } END_TEST
 
 TCase
-*spreadsheet_math(void)
+*spreadsheet_columns_to_indices(void)
 {
-    TCase *tc = tcase_create("Spreadsheet Math");
+    TCase *tc = tcase_create("Columns to Indices");
+
+    tcase_add_checked_fixture(tc, setup, teardown);
+    tcase_add_test(tc, column_A_to_index_0);
+
+    return tc;
+}
+
+TCase
+*spreadsheet_indices_to_columns(void)
+{
+    TCase *tc = tcase_create("Indices to Columns");
 
     tcase_add_checked_fixture(tc, setup, teardown);
     tcase_add_test(tc, index_0_to_column_A);
@@ -73,7 +88,8 @@ Suite
 {
     Suite *s = suite_create("Spreadsheet Suite");
 
-    suite_add_tcase(s, spreadsheet_math());
+    suite_add_tcase(s, spreadsheet_columns_to_indices());
+    suite_add_tcase(s, spreadsheet_indices_to_columns());
 
     return s;
 }
