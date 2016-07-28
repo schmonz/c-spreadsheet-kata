@@ -23,19 +23,20 @@ static void check_index_becomes_column(size_t index, const char *expected)
     free(actual);
 }
 
-START_TEST(index_0_to_column_A)
-{
+START_TEST(index_0_to_column_A) {
     check_index_becomes_column(0, "A");
 } END_TEST
 
-START_TEST(index_1_to_column_B)
-{
+START_TEST(index_1_to_column_B) {
     check_index_becomes_column(1, "B");
 } END_TEST
 
-START_TEST(index_25_to_column_Z)
-{
+START_TEST(index_25_to_column_Z) {
     check_index_becomes_column(25, "Z");
+} END_TEST
+
+START_TEST(index_26_to_column_AA) {
+    check_index_becomes_column(26, "AA");
 } END_TEST
 
 TCase
@@ -47,6 +48,7 @@ TCase
     tcase_add_test(tc, index_0_to_column_A);
     tcase_add_test(tc, index_1_to_column_B);
     tcase_add_test(tc, index_25_to_column_Z);
+    tcase_add_test(tc, index_26_to_column_AA);
 
     return tc;
 }
