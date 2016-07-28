@@ -24,9 +24,12 @@ static int char_to_int(char c)
 static int column_to_index(const char *column)
 {
     int result = char_to_int(column[0]);
+
     if (strlen(column) > 1) {
-        result += 26 * (char_to_int(column[1] + 1));
+        result = 26 * (result + 1);
+        result += char_to_int(column[1]);
     }
+
     return result;
 }
 
