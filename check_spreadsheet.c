@@ -27,6 +27,10 @@ START_TEST(column_A_to_index_0) {
     ck_assert_int_eq(0, sheet->column_to_index("A"));
 } END_TEST
 
+START_TEST(column_B_to_index_1) {
+    ck_assert_int_eq(1, sheet->column_to_index("B"));
+} END_TEST
+
 START_TEST(index_0_to_column_A) {
     check_index_becomes_column(0, "A");
 } END_TEST
@@ -62,6 +66,7 @@ TCase
 
     tcase_add_checked_fixture(tc, setup, teardown);
     tcase_add_test(tc, column_A_to_index_0);
+    tcase_add_test(tc, column_B_to_index_1);
 
     return tc;
 }

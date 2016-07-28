@@ -18,8 +18,7 @@ static void reverse(char *string)
 
 static int column_to_index(const char *column)
 {
-    (void)column;
-    return 0;
+    return column[0] - 'A';
 }
 
 static char int_to_char(size_t n)
