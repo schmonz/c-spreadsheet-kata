@@ -14,12 +14,22 @@ START_TEST(spreadsheet_create_and_destroy)
 }
 END_TEST
 
+START_TEST(index_0_to_column_A)
+{
+    spreadsheet_t sheet = spreadsheet_create();
+
+    ck_assert_str_eq("A", sheet->index_to_column(0));
+
+    spreadsheet_destroy(sheet);
+} END_TEST
+
 TCase
 *spreadsheet_math(void)
 {
     TCase *tc = tcase_create("Spreadsheet Math");
 
     tcase_add_test(tc, spreadsheet_create_and_destroy);
+    tcase_add_test(tc, index_0_to_column_A);
 
     return tc;
 }
