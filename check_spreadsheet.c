@@ -7,10 +7,10 @@
 START_TEST(spreadsheet_create_and_destroy)
 {
     spreadsheet_t sheet = spreadsheet_create();
+
     ck_assert_ptr_ne(NULL, sheet);
 
-    spreadsheet_destroy(&sheet);
-    ck_assert_ptr_eq(NULL, sheet);
+    spreadsheet_destroy(sheet);
 }
 END_TEST
 

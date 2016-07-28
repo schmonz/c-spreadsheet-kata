@@ -8,8 +8,7 @@ spreadsheet_t spreadsheet_create(void)
     return sheet;
 }
 
-void spreadsheet_destroy(spreadsheet_t *sheet)
+void spreadsheet_destroy(spreadsheet_t sheet)
 {
-    free(*sheet);
-    *sheet = NULL;
+    free(sheet);
 }
