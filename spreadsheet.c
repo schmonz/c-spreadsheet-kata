@@ -57,13 +57,14 @@ static char * index_to_column(int index)
 
 spreadsheet_t spreadsheet_create(void)
 {
-    spreadsheet_t sheet = malloc(1);
-    sheet->index_to_column = index_to_column;
-    sheet->column_to_index = column_to_index;
+    spreadsheet_t sheet = {
+        index_to_column,
+        column_to_index,
+    };
     return sheet;
 }
 
 void spreadsheet_destroy(spreadsheet_t sheet)
 {
-    free(sheet);
+    (void)sheet;
 }

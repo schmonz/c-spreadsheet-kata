@@ -18,12 +18,12 @@ void teardown(void)
 
 static void check_column_becomes_index(const char *column, size_t expected)
 {
-    ck_assert_int_eq(expected, sheet->column_to_index(column));
+    ck_assert_int_eq(expected, sheet.column_to_index(column));
 }
 
 static void check_index_becomes_column(size_t index, const char *expected)
 {
-    char *actual = sheet->index_to_column(index);
+    char *actual = sheet.index_to_column(index);
     ck_assert_str_eq(expected, actual);
     free(actual);
 }
